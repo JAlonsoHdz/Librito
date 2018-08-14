@@ -1,0 +1,4 @@
+Bundle-Name: librito-web
+Bundle-SymbolicName: com.liferay.docs.librito.portlet
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.docs.librito.portlet.constants
