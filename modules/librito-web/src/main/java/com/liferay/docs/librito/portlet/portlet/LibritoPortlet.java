@@ -47,18 +47,19 @@ public class LibritoPortlet extends MVCPortlet {
 	        PortletPreferences prefs = request.getPreferences();
 
 	        String[] guestbookEntries = prefs.getValues("librito-entries",
-	                new String[1]);
+	                new String[2]);
 
 	        ArrayList<String> entries = new ArrayList<String>();
 
 	        if (guestbookEntries[0] != null) {
 	            entries = new ArrayList<String>(Arrays.asList(prefs.getValues(
-	                    "librito-entries", new String[1])));
+	                    "librito-entries", new String[2])));
 	        }
 
 	        String userName = ParamUtil.getString(request, "name");
 	        String message = ParamUtil.getString(request, "message");
-	        String entry = userName + "^" + message;
+	        String newfield = ParamUtil.getString(request, "newfield");
+	        String entry = userName + "^" + message + "^" + newfield;
 
 	        entries.add(entry);
 
@@ -90,7 +91,7 @@ public class LibritoPortlet extends MVCPortlet {
 	    throws PortletException, IOException {
 
 	    PortletPreferences prefs = renderRequest.getPreferences();
-	    String[] guestbookEntries = prefs.getValues("librito-entries", new String[1]);
+	    String[] guestbookEntries = prefs.getValues("librito-entries", new String[2]);
 
 	    if (guestbookEntries[0] != null) {
 	        List<Entry> entries = parseEntries(guestbookEntries);
@@ -104,8 +105,12 @@ public class LibritoPortlet extends MVCPortlet {
 	    List<Entry> entries = new ArrayList<Entry>();
 
 	    for (String entry : guestbookEntries) {
-	        String[] parts = entry.split("\\^", 2);
-	        Entry gbEntry = new Entry(parts[0], parts[1]);
+	        String[] parts = entry.split("\\^", 3);
+	        
+	        
+//	        System.out.println(parts[0] + " ESPACIO" + parts[1] + " ESPACIO"+ parts[2]);
+	        
+	        Entry gbEntry = new Entry(parts[0], parts[1], parts[2]);
 	        entries.add(gbEntry);
 	    }
 

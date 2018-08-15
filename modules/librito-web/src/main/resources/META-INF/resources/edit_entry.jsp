@@ -10,6 +10,7 @@
         <aui:fieldset>
             <aui:input name="name"></aui:input>
             <aui:input name="message"></aui:input>
+            <aui:input name="newfield"></aui:input>
         </aui:fieldset>
 
         <aui:button-row>

@@ -1,3 +1,6 @@
 .gradle/
 build/
 target/
+/.gitignore
+/bnd.bnd
+/build.gradle
