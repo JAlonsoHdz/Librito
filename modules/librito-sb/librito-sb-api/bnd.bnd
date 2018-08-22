@@ -1,0 +1,9 @@
+Bundle-Name: librito-sb-api
+Bundle-SymbolicName: com.liferay.docs.librito.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.docs.librito.exception,\
+	com.liferay.docs.librito.model,\
+	com.liferay.docs.librito.service,\
+	com.liferay.docs.librito.service.persistence
+-includeresource: META-INF/service.xml=../librito-sb-service/service.xml

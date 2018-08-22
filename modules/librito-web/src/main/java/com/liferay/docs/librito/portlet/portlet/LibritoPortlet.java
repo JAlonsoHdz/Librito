@@ -30,17 +30,22 @@ import com.liferay.portal.kernel.util.ParamUtil;
 @Component(
 	immediate = true,
 	property = {
-		"com.liferay.portlet.display-category=category.sample",
+		"com.liferay.portlet.display-category=category.social",
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=librito-web Portlet",
+		"com.liferay.portlet.scopeable=true",
+		"javax.portlet.display-name=Librito Portlet",
+		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.template-path=/",
-		"javax.portlet.init-param.view-template=/view.jsp",
-		"javax.portlet.name=" + LibritoPortletKeys.Librito,
+		"javax.portlet.init-param.view-template=/libritowebportlet/view.jsp",
+		"javax.portlet.name=" + LibritoPortletKeys.LIBRITO,
 		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=power-user,user"
+		"javax.portlet.security-role-ref=power-user,user",
+		"javax.portlet.supports.mime-type=text/html"
 	},
 	service = Portlet.class
 )
+
+
 public class LibritoPortlet extends MVCPortlet {
 	public void addEntry(ActionRequest request, ActionResponse response) {
 		try {
