@@ -1,13 +1,44 @@
-<%@include file="../init.jsp"%>  
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<%@include file="../init.jsp" %>
 
-</body>
-</html>
+<% 
+
+long entryId = ParamUtil.getLong(renderRequest, "entryId");
+
+Entry entry = null;
+if (entryId > 0) {
+  entry = EntryLocalServiceUtil.getEntry(entryId);
+}
+
+long guestbookId = ParamUtil.getLong(renderRequest, "guestbookId");
+
+%>
+
+<portlet:renderURL var="viewURL">
+
+<portlet:param name="mvcPath" value="/libritowebportlet/view.jsp"></portlet:param>
+
+</portlet:renderURL>
+
+<portlet:actionURL name="addEntry" var="addEntryURL"></portlet:actionURL>
+
+<aui:form action="<%= addEntryURL %>" name="<portlet:namespace />fm">
+
+<aui:model-context bean="<%= entry %>" model="<%= Entry.class %>" />
+
+    <aui:fieldset>
+
+        <aui:input name="name" />
+        <aui:input name="email" />
+        <aui:input name="message" />
+        <aui:input name="entryId" type="hidden" />
+        <aui:input name="guestbookId" type="hidden" value='<%= entry == null ? guestbookId : entry.getGuestbookId() %>'/>
+
+    </aui:fieldset>
+
+    <aui:button-row>
+
+        <aui:button type="submit"></aui:button>
+        <aui:button type="cancel" onClick="<%= viewURL.toString() %>"></aui:button>
+
+    </aui:button-row>
+</aui:form>
