@@ -9,7 +9,7 @@ long guestbookId = Long.valueOf((Long) renderRequest
 <aui:button-row cssClass="guestbook-buttons">
 
     <portlet:renderURL var="addEntryURL">
-        <portlet:param name="mvcPath" value="/guestbookwebportlet/edit_entry.jsp" />
+        <portlet:param name="mvcPath" value="/libritowebportlet/edit_entry.jsp" />
         <portlet:param name="guestbookId"
             value="<%=String.valueOf(guestbookId)%>" />
     </portlet:renderURL>

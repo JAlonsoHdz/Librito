@@ -36,7 +36,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 	immediate = true,
 	property = {
 		"com.liferay.portlet.display-category=category.social",
-		"com.liferay.portlet.instanceable=true",
+		"com.liferay.portlet.instanceable=false",
 		"com.liferay.portlet.scopeable=true",
 		"javax.portlet.display-name=Librito Portlet",
 		"javax.portlet.expiration-cache=0",
