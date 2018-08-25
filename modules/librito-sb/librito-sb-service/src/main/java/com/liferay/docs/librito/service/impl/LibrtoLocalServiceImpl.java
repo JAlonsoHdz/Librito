@@ -18,9 +18,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.docs.librito.exception.GuestbookNameException;
+import com.liferay.docs.librito.model.Entry;
 import com.liferay.docs.librito.model.Librto;
 import com.liferay.docs.librito.service.base.LibrtoLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -72,6 +74,47 @@ public class LibrtoLocalServiceImpl extends LibrtoLocalServiceBaseImpl {
 		    return guestbook;
 
 		}
+	
+		public Librto updateGuestbook(long userId, long guestbookId,
+		    String name, ServiceContext serviceContext) throws PortalException,
+		                SystemException {
+
+		        Date now = new Date();
+
+		        validate(name);
+
+		        Librto guestbook = getLibrto(guestbookId);
+
+		        User user = userLocalService.getUser(userId);
+
+		        guestbook.setUserId(userId);
+		        guestbook.setUserName(user.getFullName());
+		        guestbook.setModifiedDate(serviceContext.getModifiedDate(now));
+		        guestbook.setName(name);
+		        guestbook.setExpandoBridgeAttributes(serviceContext);
+
+		        librtoPersistence.update(guestbook);
+
+		        return guestbook;
+		}
+		
+		public Librto deleteGuestbook(long guestbookId,
+                ServiceContext serviceContext) throws PortalException,
+                SystemException {
+
+		Librto guestbook = getLibrto(guestbookId);
+
+        List<Entry> entries = entryLocalService.getEntries(
+                        serviceContext.getScopeGroupId(), guestbookId);
+
+        for (Entry entry : entries) {
+                entryLocalService.deleteEntry(entry.getEntryId());
+        }
+
+        guestbook = deleteLibrto(guestbook);
+
+        return guestbook;
+}
 	
 		public List<Librto> getGuestbooks(long groupId) {
 	

@@ -70,6 +70,14 @@ public class LibrtoLocalServiceUtil {
 		return getService().createLibrto(guestbookId);
 	}
 
+	public static com.liferay.docs.librito.model.Librto deleteGuestbook(
+		long guestbookId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().deleteGuestbook(guestbookId, serviceContext);
+	}
+
 	/**
 	* Deletes the librto from the database. Also notifies the appropriate model listeners.
 	*
@@ -136,6 +144,15 @@ public class LibrtoLocalServiceUtil {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getLibrtoByUuidAndGroupId(uuid, groupId);
+	}
+
+	public static com.liferay.docs.librito.model.Librto updateGuestbook(
+		long userId, long guestbookId, java.lang.String name,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateGuestbook(userId, guestbookId, name, serviceContext);
 	}
 
 	/**

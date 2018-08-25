@@ -84,6 +84,9 @@ public interface LibrtoLocalService extends BaseLocalService,
 	*/
 	public Librto createLibrto(long guestbookId);
 
+	public Librto deleteGuestbook(long guestbookId,
+		ServiceContext serviceContext) throws PortalException, SystemException;
+
 	/**
 	* Deletes the librto from the database. Also notifies the appropriate model listeners.
 	*
@@ -138,6 +141,10 @@ public interface LibrtoLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Librto getLibrtoByUuidAndGroupId(java.lang.String uuid, long groupId)
 		throws PortalException;
+
+	public Librto updateGuestbook(long userId, long guestbookId,
+		java.lang.String name, ServiceContext serviceContext)
+		throws PortalException, SystemException;
 
 	/**
 	* Updates the librto in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
